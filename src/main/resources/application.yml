@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/carcontrol
+    username: carcontrol
+    password: CcPwd23541
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+  security:
+    user:
+      name: ekz48
+      password: ekz48pwd
+      roles: USER,ADMIN
+  jpa:
+    hibernate:
+      ddl-auto: none #пусть этим рулит liquibase

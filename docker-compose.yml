@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db-postgres:
+    image: postgres:15.1-bullseye
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: carcontrol
+      POSTGRES_USER: carcontrol
+      POSTGRES_PASSWORD: CcPwd23541
+
+
