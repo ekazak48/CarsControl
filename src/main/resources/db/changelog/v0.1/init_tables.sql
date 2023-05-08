@@ -81,7 +81,7 @@ create table train_car
     train_id     int,
     car_id       int,
     cargo_type   int,
-    cargo_weight float
+    cargo_weight int
 );
 
 create unique index train_car_id_uindex
