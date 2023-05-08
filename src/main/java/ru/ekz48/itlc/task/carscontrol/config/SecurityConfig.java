@@ -10,6 +10,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityConfig(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.authorizeHttpRequests().anyRequest().permitAll().and().build();
+        return httpSecurity.csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/","/**").anonymous()
+                .requestMatchers("/swagger-ui/**").authenticated()
+                .and()
+                .build();
     }
 }
