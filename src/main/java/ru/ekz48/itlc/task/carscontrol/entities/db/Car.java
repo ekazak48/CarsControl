@@ -17,8 +17,9 @@ public class Car {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "cargo_type")
-    private String cargoType;
+    @JoinColumn(name = "cargo_type")
+    @ManyToOne
+    private CargoType cargoType;
 
     @Column(name = "cargo_weight")
     private Integer cargoWeight;
@@ -27,14 +28,15 @@ public class Car {
     @JoinColumn(name = "train_id")
     private Train train;
 
-    public Car() {
-    }
-
-    public Car(Long id, String cargoType, Integer cargoWeight, Train train) {
+    public Car(Long id, CargoType cargoType, Integer cargoWeight, Train train) {
         this.id = id;
         this.cargoType = cargoType;
         this.cargoWeight = cargoWeight;
         this.train = train;
+    }
+
+    public Car() {
+
     }
 
     public Train getTrain() {

@@ -4,8 +4,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/carcontrol
     username: carcontrol
     password: CcPwd23541
-  liquibase:
-    change-log: db/changelog/db.changelog-master.yaml
+  #liquibase:  # can use liquibase, if db schema should be manipulated safely
+   # change-log: db/changelog/db.changelog-master.yaml
   security:
     user:
       name: ekz48
@@ -13,4 +13,4 @@ spring:
       roles: USER,ADMIN
   jpa:
     hibernate:
-      ddl-auto: none #пусть этим рулит liquibase
+      ddl-auto: update # allow Hibernate to manipulate DB

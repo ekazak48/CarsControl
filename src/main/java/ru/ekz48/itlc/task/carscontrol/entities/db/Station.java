@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+import java.util.Set;
 
 @Entity(name = "stations")
 public class Station {
@@ -13,9 +17,8 @@ public class Station {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
-
-
+    @OneToMany(mappedBy = "id")
+    private Set<Runway> runways;
 
     public Long getId() {
         return id;

@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.Set;
 
 @Entity(name = "cargo_types")
 public class CargoType {
@@ -18,6 +21,9 @@ public class CargoType {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "cargoType")
+    private Set<Car> cars;
 
     public String getCode() {
         return code;
