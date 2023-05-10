@@ -13,7 +13,7 @@ public class SwaggerConfig {
     public OpenAPI productApi() {
         Server srv = new Server();
         srv.setUrl("http://localhost:8080/");
-        srv.description("Test Server");
+        srv.description("Local Server");
         return new OpenAPI().addServersItem(srv);
     }
 

@@ -17,8 +17,8 @@ public class CarService {
         this.carRepository = carJPARepository;
     }
 
-    public void modify(Car car) {
-        carRepository.save(car);
+    public Car modify(Car car) {
+        return carRepository.save(car);
     }
 
     public Car getCarById(Long id){
@@ -31,11 +31,8 @@ public class CarService {
 
     public List<Car> addCarsToCompany(List<Car> cars, Runway runway) {
 
-        for (Car car: cars) {
-            carRepository.save(car);
-        }
 
-
+        carRepository.saveAll(cars);
         return null;
     }
 

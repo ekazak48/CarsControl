@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ekz48.itlc.task.carscontrol.entities.db.Car;
+import ru.ekz48.itlc.task.carscontrol.entities.dto.CarDTO;
 import ru.ekz48.itlc.task.carscontrol.services.CarService;
+import ru.ekz48.itlc.task.carscontrol.services.CargoTypeService;
+import ru.ekz48.itlc.task.carscontrol.services.TrainService;
 
 import java.util.List;
 
@@ -18,9 +21,16 @@ import java.util.List;
 @RequestMapping("/car")
 public class CarController {
     CarService carService;
+    CargoTypeService cargoTypeService;
+    TrainService trainService;
 
-    public CarController(@Autowired CarService carService) {
+    public CarController(
+            @Autowired CarService carService,
+            @Autowired CargoTypeService cargoTypeService,
+            @Autowired TrainService trainService) {
         this.carService = carService;
+        this.cargoTypeService = cargoTypeService;
+        this.trainService = trainService;
     }
 
     @GetMapping("/getCar")
@@ -34,10 +44,36 @@ public class CarController {
     }
 
     @PostMapping("/new")
-    public Object addCar(@RequestBody Car car){
-        car.setId(0L);
-        return car;
+    public Object addCar(@RequestBody CarDTO carDto){
+        Car car = convertFromDTO(carDto);
+        car = carService.modify(car);
+        return convertToDTO(car);
     }
 
+    @PostMapping("/addCars")
+    public Object addCars(@RequestBody List<CarDTO> cars) {
+
+
+
+        return cars;
+    }
+
+    private Car convertFromDTO(CarDTO carDTO) {
+        return new Car(
+                carDTO.getId(),
+                cargoTypeService.getByCode(carDTO.getCargocode()),
+                carDTO.getCargoWeight(),
+                trainService.getById(carDTO.getTrainId())
+        );
+    }
+
+    private CarDTO convertToDTO(Car car) {
+        return new CarDTO(
+                car.getId(),
+                car.getCargoType().getCode(),
+                car.getCargoWeight(),
+                car.getTrain().getId()
+        );
+    }
 
 }

@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db-postgres:
+  db-postgres: # контейнер для тестов работы с БД
     image: postgres:15.1-bullseye
     ports:
       - '5432:5432'

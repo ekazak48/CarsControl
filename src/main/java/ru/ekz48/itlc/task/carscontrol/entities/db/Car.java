@@ -55,4 +55,20 @@ public class Car {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public CargoType getCargoType() {
+        return cargoType;
+    }
+
+    public void setCargoType(CargoType cargoType) {
+        this.cargoType = cargoType;
+    }
+
+    public Integer getCargoWeight() {
+        return cargoWeight;
+    }
+
+    public void setCargoWeight(Integer cargoWeight) {
+        this.cargoWeight = cargoWeight;
+    }
 }
