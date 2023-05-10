@@ -17,4 +17,12 @@ public class CargoTypeService {
         return cargoTypeJPARepository.findByCode(code);
     }
 
+    public CargoType addCargoType (CargoType cargoType) {
+        return cargoTypeJPARepository.save(cargoType);
+    }
+
+    public void removeCargoType(CargoType cargoType){
+        cargoTypeJPARepository.delete(cargoType);
+    }
+
 }

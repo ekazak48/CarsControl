@@ -44,18 +44,19 @@ public class CarController {
     }
 
     @PostMapping("/new")
-    public Object addCar(@RequestBody CarDTO carDto){
+    public CarDTO addCar(@RequestBody CarDTO carDto){
         Car car = convertFromDTO(carDto);
         car = carService.modify(car);
         return convertToDTO(car);
     }
 
     @PostMapping("/addCars")
-    public Object addCars(@RequestBody List<CarDTO> cars) {
+    public List<CarDTO> addCars(@RequestBody List<CarDTO> carDTOs) {
+        List<Car> cars = carDTOs.stream().map(this::convertFromDTO).toList();
 
+        cars = carService.addCars(cars, null); // TODO: дополнить логикой по поводу принятия на конкретный путь
 
-
-        return cars;
+        return cars.stream().map(this::convertToDTO).toList();
     }
 
     private Car convertFromDTO(CarDTO carDTO) {

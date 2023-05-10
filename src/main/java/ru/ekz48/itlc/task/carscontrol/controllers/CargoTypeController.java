@@ -2,7 +2,6 @@ package ru.ekz48.itlc.task.carscontrol.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,17 +50,16 @@ public class CargoTypeController {
 
     @GetMapping("/get")
     public CargoType getByCode(@RequestParam(name = "code") String code){
-        return null;
-    }
-
-    @PostMapping("/update")
-    public CargoType update(@RequestParam(name = "id") Long id, @RequestBody CargoType cargoType) {
-        return cargoType;
+        return cargoTypeService.getByCode(code);
     }
 
     @DeleteMapping(name = "/del")
-    public ResponseEntity delete(@RequestParam(name = "id") Long id) {
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+    public ResponseEntity delete(@RequestParam(name = "code") String code) {
+        CargoType cargoType = cargoTypeService.getByCode(code);
+        if (cargoType != null) {
+            cargoTypeService.removeCargoType(cargoType);
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }
